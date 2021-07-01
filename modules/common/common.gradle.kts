@@ -1,8 +1,5 @@
 plugins {
-    id("io.spring.dependency-management")
-    kotlin("jvm")
-    kotlin("plugin.spring")
-    `maven-publish`
+    `publishing-module`
 }
 
 dependencies {

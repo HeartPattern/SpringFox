@@ -2,7 +2,13 @@ plugins {
     id("io.spring.dependency-management")
     kotlin("jvm")
     kotlin("plugin.spring")
-    id("kr.entree.spigradle") version "2.2.3"
+//    id("kr.entree.spigradle") version "2.2.3"
+}
+
+repositories{
+    mavenCentral()
+
+    maven("https://repo.heartpattern.io/repository/maven-public/")
 }
 
 dependencies {
