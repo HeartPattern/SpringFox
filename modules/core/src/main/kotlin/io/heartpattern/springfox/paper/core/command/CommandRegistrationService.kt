@@ -12,6 +12,7 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible
 
 class CommandRegistrationService {
+    @Suppress("UNCHECKED_CAST")
     @get:Bean
     val commandMap: CommandMap = (Bukkit.getServer()::class
         .declaredMemberProperties.find { it.name == "commandMap" } as KProperty1<Server, CommandMap>).run {

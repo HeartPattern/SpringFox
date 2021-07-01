@@ -11,6 +11,7 @@ class TabCompleterRegistrar(
 ) : AnnotatedMethodScanner<TabCompleteHandler>(
     TabCompleteHandler::class
 ) {
+    @Suppress("UNCHECKED_CAST")
     override fun postProcessAfterMethodInitialize(
         bean: Any,
         beanName: String,
