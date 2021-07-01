@@ -8,6 +8,7 @@ plugins {
     id("io.spring.dependency-management")
 
     `maven-publish`
+    signing
 }
 
 repositories {
@@ -18,6 +19,8 @@ dependencies {
     "dokkaHtmlPlugin"("org.jetbrains.dokka", "kotlin-as-java-plugin", "1.4.32")
 }
 
+tasks.compileKotlin.get().kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+
 tasks.create<Jar>("sourceJar") {
     from(sourceSets["main"].allSource)
     archiveClassifier.set("sources")
@@ -26,10 +29,6 @@ tasks.create<Jar>("sourceJar") {
 tasks.create<Jar>("javadocJar") {
     from(tasks["dokkaJavadoc"].outputs)
     archiveClassifier.set("javadoc")
-}
-
-tasks.jar {
-
 }
 
 publishing {
@@ -51,7 +50,7 @@ publishing {
 
     publications {
         create<MavenPublication>("maven") {
-            artifactId = project.name.replace('.', '-')
+            artifactId = "springfox-" + project.name.replace('.', '-')
             from(components["java"])
 
             artifact(tasks["sourceJar"]) {
@@ -61,6 +60,37 @@ publishing {
             artifact(tasks["javadocJar"]) {
                 classifier = "javadoc"
             }
+
+            pom {
+                name.set("SpringFox")
+                description.set("Spring auto configuration module provide paper related feature.")
+                url.set("https://github.com/HeartPattern/SpringFox")
+                packaging = "jar"
+
+                licenses {
+                    license {
+                        name.set("MIT License")
+                        url.set("https://opensource.org/licenses/MIT")
+                    }
+                }
+
+                developers {
+                    developer{
+                        name.set("HeartPattern")
+                        email.set("heartpattern@heartpattern.io")
+                    }
+                }
+
+                scm {
+                    connection.set("scm:git:git://github.com/HeartPattern/SpringFox.git")
+                    developerConnection.set("scm:git:git://github.com/HeartPattern/SpringFox.git")
+                    url.set("https://github.com/HeartPattern/SpringFox/tree/master")
+                }
+            }
         }
     }
+}
+
+signing {
+    sign(publishing.publications["maven"])
 }

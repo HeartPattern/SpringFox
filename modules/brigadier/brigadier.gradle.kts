@@ -5,6 +5,7 @@ plugins {
 dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation(kotlin("reflect"))
+    implementation("org.jetbrains.kotlinx","kotlinx-coroutines-core","1.5.0")
 
     compileOnly("com.destroystokyo.paper", "paper-api", "1.16.5-R0.1-SNAPSHOT")
     compileOnly("com.destroystokyo.paper", "paper-mojangapi", "1.16.5-R0.1-SNAPSHOT")
