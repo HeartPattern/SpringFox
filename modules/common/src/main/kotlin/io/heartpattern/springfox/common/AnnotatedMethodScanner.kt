@@ -8,12 +8,22 @@ import org.springframework.core.annotation.AnnotatedElementUtils
 import java.lang.reflect.Method
 import kotlin.reflect.KClass
 
+/**
+ * Helper class that scan every method in every registering bean which is annotated with [A]
+ */
 abstract class AnnotatedMethodScanner<A : Annotation>(
     private val annotationType: KClass<A>
 ) : DestructionAwareBeanPostProcessor, Ordered {
     private val logger = KotlinLogging.logger {}
 
+    /**
+     * Process method annotated with [A] after bean initialize
+     */
     abstract fun postProcessAfterMethodInitialize(bean: Any, beanName: String, method: Method, annotation: A)
+
+    /**
+     * Process method annotated with [A] before bean destroy
+     */
     abstract fun postProcessBeforeMethodDestruction(bean: Any, beanName: String, method: Method, annotation: A)
 
     override fun postProcessAfterInitialization(bean: Any, beanName: String): Any? {

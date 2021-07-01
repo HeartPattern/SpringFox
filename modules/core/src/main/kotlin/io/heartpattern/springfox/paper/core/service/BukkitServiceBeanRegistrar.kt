@@ -7,6 +7,9 @@ import org.springframework.context.ApplicationContext
 import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ConfigurableApplicationContext
 
+/**
+ * Register bukkit services as spring bean.
+ */
 class BukkitServiceBeanRegistrar : ApplicationContextAware {
     override fun setApplicationContext(applicationContext: ApplicationContext) {
         val beanFactory =

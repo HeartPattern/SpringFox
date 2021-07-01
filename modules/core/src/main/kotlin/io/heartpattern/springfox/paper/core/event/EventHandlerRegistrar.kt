@@ -12,6 +12,9 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.MethodParameter
 import java.lang.reflect.Method
 
+/**
+ * Register all method annotated with [EventHandler] in bean
+ */
 class EventHandlerRegistrar : AnnotatedMethodScanner<EventHandler>(
     EventHandler::class
 ) {

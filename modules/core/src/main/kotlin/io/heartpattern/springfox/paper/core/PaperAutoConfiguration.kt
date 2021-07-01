@@ -5,19 +5,18 @@ import io.heartpattern.springfox.paper.core.command.CommandRegistrationService
 import io.heartpattern.springfox.paper.core.command.TabCompleterRegistrar
 import io.heartpattern.springfox.paper.core.event.EventHandlerRegistrar
 import io.heartpattern.springfox.paper.core.service.BukkitServiceBeanRegistrar
+import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 
+/**
+ * Autoconfiguration module for springfox
+ */
 @Configuration
-class PaperAutoConfiguration {
-
-    // Plugin
-
-    @get:Bean
-    val plugin: SpringFoxPlugin
-        get() = (PaperAutoConfiguration::class.java.classLoader as PluginClassLoader).plugin as SpringFoxPlugin
-
+class PaperAutoConfiguration(
+    private val plugin: JavaPlugin
+) {
     // Commands
 
     @get: Bean

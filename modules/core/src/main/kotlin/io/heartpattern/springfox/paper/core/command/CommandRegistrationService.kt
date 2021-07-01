@@ -11,6 +11,9 @@ import kotlin.reflect.full.declaredMemberFunctions
 import kotlin.reflect.full.declaredMemberProperties
 import kotlin.reflect.jvm.isAccessible
 
+/**
+ * Service that inject SpringFoxCommand into bukkit command system
+ */
 class CommandRegistrationService {
     @Suppress("UNCHECKED_CAST")
     @get:Bean

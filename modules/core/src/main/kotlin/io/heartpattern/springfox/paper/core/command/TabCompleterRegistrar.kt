@@ -2,10 +2,15 @@ package io.heartpattern.springfox.paper.core.command
 
 import io.heartpattern.springfox.common.AnnotatedMethodScanner
 import io.heartpattern.springfox.paper.core.command.annotation.TabCompleteHandler
+import io.heartpattern.springfox.paper.core.command.model.TabCompletionInvocation
 import io.heartpattern.springfox.paper.core.command.model.SpringFoxPluginCommand
 import org.springframework.core.Ordered
 import java.lang.reflect.Method
 
+/**
+ * Registering method annotated with [TabCompleteHandler] as command handler.
+ * Method should take [TabCompletionInvocation] as parameter
+ */
 class TabCompleterRegistrar(
     private val commandRegistrationService: CommandRegistrationService
 ) : AnnotatedMethodScanner<TabCompleteHandler>(

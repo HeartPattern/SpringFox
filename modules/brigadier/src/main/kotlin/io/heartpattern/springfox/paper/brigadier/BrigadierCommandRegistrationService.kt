@@ -15,6 +15,9 @@ import org.bukkit.entity.Entity
 import org.bukkit.event.EventHandler
 import org.bukkit.plugin.Plugin
 
+/**
+ * Service that inject brigadier command into bukkit system
+ */
 class BrigadierCommandRegistrationService(
     private val commandRegistrationService: CommandRegistrationService
 ) {

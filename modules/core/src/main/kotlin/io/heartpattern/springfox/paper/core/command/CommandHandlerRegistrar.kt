@@ -2,11 +2,16 @@ package io.heartpattern.springfox.paper.core.command
 
 import io.heartpattern.springfox.common.AnnotatedMethodScanner
 import io.heartpattern.springfox.paper.core.command.annotation.CommandHandler
+import io.heartpattern.springfox.paper.core.command.model.CommandInvocation
 import io.heartpattern.springfox.paper.core.command.model.SpringFoxPluginCommand
 import org.bukkit.plugin.Plugin
 import org.springframework.core.Ordered
 import java.lang.reflect.Method
 
+/**
+ * Registering method annotated with [CommandHandler] as command handler.
+ * Method should take [CommandInvocation] as parameter
+ */
 class CommandHandlerRegistrar(
     private val plugin: Plugin,
     private val commandRegistrationService: CommandRegistrationService

@@ -4,6 +4,9 @@ import io.heartpattern.springfox.paper.core.command.annotation.CommandHandler
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
+/**
+ * [Command] implementation for spring fox
+ */
 @OptIn(ExperimentalStdlibApi::class)
 class SpringFoxPluginCommand(
     name: String,
