@@ -8,18 +8,17 @@ import org.bukkit.event.EventHandler
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.core.MethodParameter
 import java.lang.reflect.Method
 
 /**
  * Register all method annotated with [EventHandler] in bean
  */
-class EventHandlerRegistrar : AnnotatedMethodScanner<EventHandler>(
+class EventHandlerRegistrar(
+    private val plugin: Plugin
+) : AnnotatedMethodScanner<EventHandler>(
     EventHandler::class
 ) {
-    @Autowired
-    private lateinit var plugin: Plugin
     private val logger = KotlinLogging.logger {}
 
     override fun postProcessAfterMethodInitialize(

@@ -14,9 +14,12 @@ import org.springframework.context.annotation.Configuration
  * Autoconfiguration module for springfox
  */
 @Configuration
-class PaperAutoConfiguration(
-    private val plugin: JavaPlugin
-) {
+class PaperAutoConfiguration{
+    // Plugin
+    @get: Bean
+    val plugin: SpringFoxPlugin
+        get() = (SpringFoxPlugin::class.java.classLoader as PluginClassLoader).plugin as SpringFoxPlugin
+
     // Commands
 
     @get: Bean
@@ -41,5 +44,5 @@ class PaperAutoConfiguration(
 
     @get: Bean
     val eventHandlerRegistrar
-        get() = EventHandlerRegistrar()
+        get() = EventHandlerRegistrar(plugin)
 }
