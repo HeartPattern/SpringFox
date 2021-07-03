@@ -8,6 +8,8 @@ import kotlinx.coroutines.SupervisorJob
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 import org.springframework.boot.SpringApplication
+import org.springframework.context.ApplicationContextAware
+import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.io.DefaultResourceLoader
 import java.util.logging.Level
