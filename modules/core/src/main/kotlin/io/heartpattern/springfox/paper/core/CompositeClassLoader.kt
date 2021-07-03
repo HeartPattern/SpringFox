@@ -10,9 +10,9 @@ import java.util.*
 class CompositeClassLoader(
     private val classLoaders: List<ClassLoader>
 ) : ClassLoader() {
-    private fun <T> findAny(finder: ClassLoader.() -> T?): T? {
+    private fun <T> findAny(finder: (ClassLoader) -> T?): T? {
         for (classLoader in classLoaders) {
-            val value = classLoader.finder()
+            val value = finder(classLoader)
             if (value != null)
                 return value
         }
@@ -21,7 +21,7 @@ class CompositeClassLoader(
     }
 
     override fun getResourceAsStream(name: String?): InputStream? {
-        return findAny { getResourceAsStream(name) }
+        return findAny { it.getResourceAsStream(name) }
     }
 
     override fun findClass(name: String?): Class<*> {
@@ -37,7 +37,7 @@ class CompositeClassLoader(
     }
 
     override fun findResource(name: String?): URL? {
-        return findAny { findResource(name) }
+        return findAny { it.getResource(name) }
     }
 
     override fun findResources(name: String?): Enumeration<URL> {
