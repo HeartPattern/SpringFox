@@ -12,7 +12,6 @@ dependencies {
 
     implementation(project(":common"))
 
-    implementation("org.springframework.boot", "spring-boot-starter", "2.4.5")
     implementation("io.github.microutils", "kotlin-logging-jvm", "2.0.8")
 
     compileOnly("com.google.auto.service", "auto-service-annotations", "1.0-rc7")

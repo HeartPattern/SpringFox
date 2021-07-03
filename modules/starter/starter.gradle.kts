@@ -12,6 +12,9 @@ dependencies {
     api("org.jetbrains.kotlinx", "kotlinx-coroutines-core", "1.5.0")
     api("org.jetbrains.kotlinx", "kotlinx-coroutines-jdk8", "1.5.0")
 
-    api("org.springframework.boot", "spring-boot-starter", "2.4.5")
+    api("org.springframework.boot", "spring-boot-starter", "2.5.2")
     api("io.github.microutils", "kotlin-logging-jvm", "2.0.8")
 }
+
+configurations.api.get().exclude("org.springframework.boot", "spring-boot-starter-logging")
+configurations.api.get().exclude("org.slf4j", "slf4j-api")
