@@ -18,5 +18,3 @@ fun addModule(name: String, dir: String = "modules/$name"){
 for(module in modules){
     addModule(module)
 }
-
-addModule("test", "test")
