@@ -6,11 +6,10 @@ import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.SupervisorJob
 import org.bukkit.plugin.java.JavaPlugin
+import org.bukkit.plugin.java.PluginClassLoader
 import org.springframework.boot.SpringApplication
-import org.springframework.boot.builder.SpringApplicationBuilder
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.io.DefaultResourceLoader
-import java.util.*
 import java.util.logging.Level
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
@@ -19,16 +18,23 @@ import kotlin.reflect.KClass
  * SpringFox plugin entrypoint.
  */
 abstract class SpringFoxPlugin(private val applicationClass: KClass<*>) : JavaPlugin(), CoroutineScope {
+    private val libraryLoaderField = PluginClassLoader::class.java.getDeclaredField("libraryLoader")
     private lateinit var applicationContext: ConfigurableApplicationContext
 
     final override fun onEnable() {
-        val currentClassLoader = Thread.currentThread().contextClassLoader
-        System.setProperty("org.springframework.boot.logging.LoggingSystem", "org.springframework.boot.logging.java.JavaLoggingSystem")
-        Thread.currentThread().contextClassLoader = classLoader
-        applicationContext = SpringApplication(applicationClass.java).apply{
-            resourceLoader = DefaultResourceLoader(applicationClass.java.classLoader)
-        }.run()
-        Thread.currentThread().contextClassLoader = currentClassLoader
+        val compositeClassLoader = getCompositeLoader()
+
+        withContextClassLoader(compositeClassLoader) {
+            // Fix logger issue
+            System.setProperty(
+                "org.springframework.boot.logging.LoggingSystem",
+                "org.springframework.boot.logging.java.JavaLoggingSystem"
+            )
+
+            applicationContext = SpringApplication(applicationClass.java).apply {
+                resourceLoader = DefaultResourceLoader(compositeClassLoader)
+            }.run()
+        }
     }
 
     final override fun onDisable() {
@@ -43,4 +49,21 @@ abstract class SpringFoxPlugin(private val applicationClass: KClass<*>) : JavaPl
                 "Uncatched exception from coroutine $ctx"
             }
         }
+
+    private fun getCompositeLoader(): ClassLoader {
+        return CompositeClassLoader(listOf(classLoader, getLibraryLoader()))
+    }
+
+    private fun getLibraryLoader(): ClassLoader {
+        libraryLoaderField.isAccessible = true
+
+        return libraryLoaderField.get(classLoader) as ClassLoader
+    }
+
+    private inline fun withContextClassLoader(classLoader: ClassLoader, block: () -> Unit) {
+        val currentClassLoader = Thread.currentThread().contextClassLoader
+        Thread.currentThread().contextClassLoader = classLoader
+        block()
+        Thread.currentThread().contextClassLoader = currentClassLoader
+    }
 }
