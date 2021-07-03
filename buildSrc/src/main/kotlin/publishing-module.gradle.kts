@@ -19,7 +19,10 @@ dependencies {
     "dokkaHtmlPlugin"("org.jetbrains.dokka", "kotlin-as-java-plugin", "1.4.32")
 }
 
-tasks.compileKotlin.get().kotlinOptions.freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+tasks.compileKotlin.get().kotlinOptions{
+    freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
+    jvmTarget = "11"
+}
 
 tasks.create<Jar>("sourceJar") {
     from(sourceSets["main"].allSource)
