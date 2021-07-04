@@ -14,7 +14,7 @@ import java.lang.reflect.Method
 /**
  * Register all method annotated with [EventHandler] in bean
  */
-class EventHandlerRegistrar(
+open class EventHandlerRegistrar(
     private val plugin: Plugin
 ) : AnnotatedMethodScanner<EventHandler>(
     EventHandler::class

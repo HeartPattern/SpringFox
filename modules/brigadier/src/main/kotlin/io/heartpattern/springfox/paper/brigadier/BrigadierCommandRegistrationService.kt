@@ -18,7 +18,7 @@ import org.bukkit.plugin.Plugin
 /**
  * Service that inject brigadier command into bukkit system
  */
-class BrigadierCommandRegistrationService(
+open class BrigadierCommandRegistrationService(
     private val commandRegistrationService: CommandRegistrationService
 ) {
     private val dispatcher = CommandDispatcher<BukkitBrigadierCommandSource>()

@@ -11,7 +11,7 @@ import java.lang.reflect.Method
  * Registering method annotated with [TabCompleteHandler] as command handler.
  * Method should take [TabCompletionInvocation] as parameter
  */
-class TabCompleterRegistrar(
+open class TabCompleterRegistrar(
     private val commandRegistrationService: CommandRegistrationService
 ) : AnnotatedMethodScanner<TabCompleteHandler>(
     TabCompleteHandler::class

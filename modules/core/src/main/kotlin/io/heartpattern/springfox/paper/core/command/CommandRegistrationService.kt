@@ -14,7 +14,7 @@ import kotlin.reflect.jvm.isAccessible
 /**
  * Service that inject SpringFoxCommand into bukkit command system
  */
-class CommandRegistrationService {
+open class CommandRegistrationService {
     @Suppress("UNCHECKED_CAST")
     @get:Bean
     val commandMap: CommandMap = (Bukkit.getServer()::class

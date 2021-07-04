@@ -8,7 +8,7 @@ import org.springframework.beans.factory.config.BeanPostProcessor
 /**
  * Register all bean of type [LiteralCommandNode] as command
  */
-class BrigadierCommandRegistrar(
+open class BrigadierCommandRegistrar(
     private val plugin: Plugin,
     private val brigadierCommandRegistrationService: BrigadierCommandRegistrationService
 ) : BeanPostProcessor {

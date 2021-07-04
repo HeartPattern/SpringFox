@@ -12,7 +12,7 @@ import java.lang.reflect.Method
  * Registering method annotated with [CommandHandler] as command handler.
  * Method should take [CommandInvocation] as parameter
  */
-class CommandHandlerRegistrar(
+open class CommandHandlerRegistrar(
     private val plugin: Plugin,
     private val commandRegistrationService: CommandRegistrationService
 ) : AnnotatedMethodScanner<CommandHandler>(
