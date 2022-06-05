@@ -1,1 +1,3 @@
-org.springframework.boot.autoconfigure.EnableAutoConfiguration=io.heartpattern.springfox.paper.brigadier.BrigadierAutoConfiguration
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+  io.heartpattern.springfox.paper.brigadier.BrigadierAutoConfiguration,\
+  io.heartpattern.springfox.paper.command.CommandAutoConfiguration
