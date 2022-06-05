@@ -16,7 +16,7 @@ repositories {
 }
 
 dependencies {
-    "dokkaHtmlPlugin"("org.jetbrains.dokka", "kotlin-as-java-plugin", "1.4.32")
+    dokkaHtmlPlugin("org.jetbrains.dokka", "kotlin-as-java-plugin", Versions.DOKKA)
 }
 
 tasks.compileKotlin.get().kotlinOptions{
