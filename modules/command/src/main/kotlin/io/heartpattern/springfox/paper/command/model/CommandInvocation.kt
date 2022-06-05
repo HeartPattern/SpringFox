@@ -1,9 +1,12 @@
-package io.heartpattern.springfox.paper.core.command.model
+package io.heartpattern.springfox.paper.command.model
 
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
-data class TabCompletionInvocation(
+/**
+ * Represent data provided on command invocation
+ */
+data class CommandInvocation(
     val sender: CommandSender,
     val command: Command,
     val label: String,

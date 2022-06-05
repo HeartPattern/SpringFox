@@ -1,8 +1,8 @@
-package io.heartpattern.springfox.paper.core.command.annotation
+package io.heartpattern.springfox.paper.command.annotation
 
 /**
  * Annotate command handler
- * @see io.heartpattern.springfox.paper.core.command.CommandHandlerRegistrar
+ * @see io.heartpattern.springfox.paper.command.CommandHandlerRegistrar
  */
 @Retention(AnnotationRetention.RUNTIME)
 @Target(AnnotationTarget.FUNCTION)

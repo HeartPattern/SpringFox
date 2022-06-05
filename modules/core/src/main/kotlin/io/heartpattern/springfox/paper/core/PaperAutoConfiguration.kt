@@ -1,8 +1,5 @@
 package io.heartpattern.springfox.paper.core
 
-import io.heartpattern.springfox.paper.core.command.CommandHandlerRegistrar
-import io.heartpattern.springfox.paper.core.command.CommandRegistrationService
-import io.heartpattern.springfox.paper.core.command.TabCompleterRegistrar
 import io.heartpattern.springfox.paper.core.event.EventHandlerRegistrar
 import io.heartpattern.springfox.paper.core.service.BukkitServiceBeanRegistrar
 import org.bukkit.plugin.java.PluginClassLoader
@@ -32,20 +29,6 @@ class PaperAutoConfiguration : ApplicationContextAware {
             val bean = applicationContext.getBean(application)
             return (bean::class.java.classLoader as PluginClassLoader).plugin as SpringFoxPlugin
         }
-
-    // Commands
-
-    @get: Bean
-    val commandRegistrationService
-        get() = CommandRegistrationService()
-
-    @get:Bean
-    val commandHandlerRegistrar
-        get() = CommandHandlerRegistrar(plugin, commandRegistrationService)
-
-    @get: Bean
-    val tabCompleterRegistrar
-        get() = TabCompleterRegistrar(commandRegistrationService)
 
     // Services
 

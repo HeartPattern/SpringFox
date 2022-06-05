@@ -1,4 +1,4 @@
-package io.heartpattern.springfox.paper.core.command
+package io.heartpattern.springfox.paper.command
 
 import org.bukkit.Bukkit
 import org.bukkit.Server

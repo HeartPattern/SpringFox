@@ -1,9 +1,9 @@
-package io.heartpattern.springfox.paper.core.command
+package io.heartpattern.springfox.paper.command
 
 import io.heartpattern.springfox.common.AnnotatedMethodScanner
-import io.heartpattern.springfox.paper.core.command.annotation.CommandHandler
-import io.heartpattern.springfox.paper.core.command.model.CommandInvocation
-import io.heartpattern.springfox.paper.core.command.model.SpringFoxPluginCommand
+import io.heartpattern.springfox.paper.command.annotation.CommandHandler
+import io.heartpattern.springfox.paper.command.model.CommandInvocation
+import io.heartpattern.springfox.paper.command.model.SpringFoxPluginCommand
 import org.bukkit.plugin.Plugin
 import org.springframework.core.Ordered
 import java.lang.reflect.Method

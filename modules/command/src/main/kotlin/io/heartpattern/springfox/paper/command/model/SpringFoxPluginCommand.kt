@@ -1,13 +1,12 @@
-package io.heartpattern.springfox.paper.core.command.model
+package io.heartpattern.springfox.paper.command.model
 
-import io.heartpattern.springfox.paper.core.command.annotation.CommandHandler
+import io.heartpattern.springfox.paper.command.annotation.CommandHandler
 import org.bukkit.command.Command
 import org.bukkit.command.CommandSender
 
 /**
  * [Command] implementation for spring fox
  */
-@OptIn(ExperimentalStdlibApi::class)
 class SpringFoxPluginCommand(
     name: String,
     description: String,

@@ -5,7 +5,7 @@ plugins {
 dependencies {
     api(project(":common"))
     api(project(":core"))
-    api(project(":brigadier"))
+    api(project(":command"))
 
     api(kotlin("stdlib-jdk8"))
     api(kotlin("reflect"))

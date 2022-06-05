@@ -2,9 +2,9 @@ rootProject.name = "SpringFox"
 
 val modules = listOf(
     "core",
-    "brigadier",
     "starter",
-    "common"
+    "common",
+    "command",
 )
 
 fun addModule(name: String, dir: String = "modules/$name"){

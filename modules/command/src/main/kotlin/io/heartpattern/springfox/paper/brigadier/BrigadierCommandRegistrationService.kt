@@ -1,12 +1,14 @@
+@file:Suppress("DEPRECATION")
+
 package io.heartpattern.springfox.paper.brigadier
 
 import com.destroystokyo.paper.brigadier.BukkitBrigadierCommandSource
 import com.destroystokyo.paper.event.brigadier.AsyncPlayerSendCommandsEvent
 import com.mojang.brigadier.CommandDispatcher
 import com.mojang.brigadier.tree.LiteralCommandNode
-import io.heartpattern.springfox.paper.core.command.CommandRegistrationService
-import io.heartpattern.springfox.paper.core.command.model.CommandInvocation
-import io.heartpattern.springfox.paper.core.command.model.SpringFoxPluginCommand
+import io.heartpattern.springfox.paper.command.CommandRegistrationService
+import io.heartpattern.springfox.paper.command.model.CommandInvocation
+import io.heartpattern.springfox.paper.command.model.SpringFoxPluginCommand
 import org.bukkit.Location
 import org.bukkit.World
 import org.bukkit.command.BlockCommandSender
