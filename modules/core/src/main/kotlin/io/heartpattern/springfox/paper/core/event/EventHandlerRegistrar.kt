@@ -1,6 +1,8 @@
 package io.heartpattern.springfox.paper.core.event
 
 import io.heartpattern.springfox.common.AnnotatedMethodScanner
+import io.heartpattern.springfox.paper.core.SpringFoxPlugin
+import kotlinx.coroutines.launch
 import mu.KotlinLogging
 import org.bukkit.Bukkit
 import org.bukkit.event.Event
@@ -10,12 +12,18 @@ import org.bukkit.event.Listener
 import org.bukkit.plugin.Plugin
 import org.springframework.core.MethodParameter
 import java.lang.reflect.Method
+import kotlin.reflect.KParameter
+import kotlin.reflect.full.callSuspend
+import kotlin.reflect.full.instanceParameter
+import kotlin.reflect.full.valueParameters
+import kotlin.reflect.jvm.isAccessible
+import kotlin.reflect.jvm.kotlinFunction
 
 /**
  * Register all method annotated with [EventHandler] in bean
  */
 open class EventHandlerRegistrar(
-    private val plugin: Plugin
+    private val plugin: SpringFoxPlugin
 ) : AnnotatedMethodScanner<EventHandler>(
     EventHandler::class
 ) {
@@ -28,8 +36,10 @@ open class EventHandlerRegistrar(
         annotation: EventHandler
     ) {
         method.isAccessible = true
+        val kotlinFunction = method.kotlinFunction
+        kotlinFunction?.isAccessible = true
 
-        if (method.parameterCount != 1) {
+        if (method.parameterCount != 1 && kotlinFunction?.parameters?.filter { it.kind != KParameter.Kind.INSTANCE }?.size != 1) {
             logger.error("Cannot register EventHandler for $method since it does not have exactly one parameter")
             return
         }
@@ -46,9 +56,20 @@ open class EventHandlerRegistrar(
             eventType as Class<out Event>,
             MethodListener(beanName, method),
             annotation.priority,
-            { _, event ->
-                if (eventType.isInstance(event))
-                    method.invoke(bean, event)
+            if (kotlinFunction == null) {
+                { _, event ->
+                    if (eventType.isInstance(event)) {
+                        method.invoke(bean, event)
+                    }
+                }
+            } else {
+                { _, event ->
+                    if (eventType.isInstance(event)) {
+                        plugin.launch {
+                            kotlinFunction.callSuspend(bean, event)
+                        }
+                    }
+                }
             },
             plugin,
             annotation.ignoreCancelled
