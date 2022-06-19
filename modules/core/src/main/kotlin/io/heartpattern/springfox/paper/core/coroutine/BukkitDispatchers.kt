@@ -4,7 +4,6 @@ import com.google.auto.service.AutoService
 import kotlinx.coroutines.*
 import kotlinx.coroutines.internal.MainDispatcherFactory
 import org.bukkit.plugin.Plugin
-import java.lang.Runnable
 import kotlin.coroutines.AbstractCoroutineContextElement
 import kotlin.coroutines.CoroutineContext
 
@@ -19,7 +18,7 @@ internal data class CoroutinePlugin(val plugin: Plugin) : AbstractCoroutineConte
 
 @Suppress("unused")
 @OptIn(InternalCoroutinesApi::class, ExperimentalCoroutinesApi::class)
-public val Dispatchers.Bukkit: MainCoroutineDispatcher
+val Dispatchers.Bukkit: MainCoroutineDispatcher
     get() = BukkitDispatcher
 
 @ExperimentalCoroutinesApi
@@ -75,6 +74,6 @@ internal object BukkitDispatcher : DispatcherBukkit() {
     override fun toString() = "Bukkit"
 }
 
-public suspend fun delayTick(tick: Long) {
+suspend fun delayTick(tick: Long) {
     delay(tick * 50)
 }

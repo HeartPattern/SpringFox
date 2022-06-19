@@ -1,8 +1,8 @@
 package io.heartpattern.springfox.paper.brigadier
 
 import io.heartpattern.springfox.paper.command.CommandAutoConfiguration
-import io.heartpattern.springfox.paper.core.PaperAutoConfiguration
 import io.heartpattern.springfox.paper.command.CommandRegistrationService
+import io.heartpattern.springfox.paper.core.PaperAutoConfiguration
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import org.springframework.context.annotation.Import

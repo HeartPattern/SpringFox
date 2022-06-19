@@ -9,13 +9,10 @@ import org.bukkit.event.Event
 import org.bukkit.event.EventHandler
 import org.bukkit.event.HandlerList
 import org.bukkit.event.Listener
-import org.bukkit.plugin.Plugin
 import org.springframework.core.MethodParameter
 import java.lang.reflect.Method
 import kotlin.reflect.KParameter
 import kotlin.reflect.full.callSuspend
-import kotlin.reflect.full.instanceParameter
-import kotlin.reflect.full.valueParameters
 import kotlin.reflect.jvm.isAccessible
 import kotlin.reflect.jvm.kotlinFunction
 

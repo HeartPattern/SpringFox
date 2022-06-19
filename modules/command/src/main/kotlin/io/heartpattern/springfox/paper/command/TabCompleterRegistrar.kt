@@ -2,8 +2,8 @@ package io.heartpattern.springfox.paper.command
 
 import io.heartpattern.springfox.common.AnnotatedMethodScanner
 import io.heartpattern.springfox.paper.command.annotation.TabCompleteHandler
-import io.heartpattern.springfox.paper.command.model.TabCompletionInvocation
 import io.heartpattern.springfox.paper.command.model.SpringFoxPluginCommand
+import io.heartpattern.springfox.paper.command.model.TabCompletionInvocation
 import org.springframework.core.Ordered
 import java.lang.reflect.Method
 

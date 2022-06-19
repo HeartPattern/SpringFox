@@ -8,13 +8,11 @@ import kotlinx.coroutines.SupervisorJob
 import org.bukkit.plugin.java.JavaPlugin
 import org.bukkit.plugin.java.PluginClassLoader
 import org.springframework.boot.SpringApplication
-import org.springframework.context.ApplicationContextAware
-import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.io.DefaultResourceLoader
 import java.io.File
 import java.io.InputStream
-import java.util.Properties
+import java.util.*
 import java.util.logging.Level
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
@@ -55,13 +53,13 @@ abstract class SpringFoxPlugin(private val applicationClass: KClass<*>) : JavaPl
     }
 
     override val coroutineContext: CoroutineContext = SupervisorJob() +
-        Dispatchers.Main +
-        CoroutinePlugin(this) +
-        CoroutineExceptionHandler { ctx, throwable ->
-            logger.log(Level.SEVERE, throwable) {
-                "Uncatched exception from coroutine $ctx"
+            Dispatchers.Main +
+            CoroutinePlugin(this) +
+            CoroutineExceptionHandler { ctx, throwable ->
+                logger.log(Level.SEVERE, throwable) {
+                    "Uncatched exception from coroutine $ctx"
+                }
             }
-        }
 
     private fun getCompositeLoader(): ClassLoader {
         return CompositeClassLoader(listOf(classLoader, getLibraryLoader()))
