@@ -12,6 +12,9 @@ import org.springframework.context.ApplicationContextAware
 import org.springframework.context.ApplicationContextInitializer
 import org.springframework.context.ConfigurableApplicationContext
 import org.springframework.core.io.DefaultResourceLoader
+import java.io.File
+import java.io.InputStream
+import java.util.Properties
 import java.util.logging.Level
 import kotlin.coroutines.CoroutineContext
 import kotlin.reflect.KClass
@@ -35,6 +38,14 @@ abstract class SpringFoxPlugin(private val applicationClass: KClass<*>) : JavaPl
 
             applicationContext = SpringApplication(applicationClass.java).apply {
                 resourceLoader = DefaultResourceLoader(compositeClassLoader)
+                setDefaultProperties(
+                    Properties().apply {
+                        put(
+                            "spring.config.additional-location",
+                            "classpath:application-config.yml,file:${prepareConfig().absolutePath}"
+                        )
+                    }
+                )
             }.run()
         }
     }
@@ -67,5 +78,19 @@ abstract class SpringFoxPlugin(private val applicationClass: KClass<*>) : JavaPl
         Thread.currentThread().contextClassLoader = classLoader
         block()
         Thread.currentThread().contextClassLoader = currentClassLoader
+    }
+
+    override fun getResource(filename: String): InputStream? {
+        // Override config.yml to application-config.yml to support IntelliJ Spring plugin
+        if (filename == "config.yml")
+            return super.getResource("application-config.yml")
+
+        return super.getResource(filename)
+    }
+
+    private fun prepareConfig(): File {
+        val configFile = File(dataFolder, "config.yml")
+        saveDefaultConfig()
+        return configFile
     }
 }
