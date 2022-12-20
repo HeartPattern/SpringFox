@@ -53,7 +53,7 @@ open class EventHandlerRegistrar(
             eventType as Class<out Event>,
             MethodListener(beanName, method),
             annotation.priority,
-            if (kotlinFunction == null) {
+            if (kotlinFunction == null || !kotlinFunction.isSuspend) {
                 { _, event ->
                     if (eventType.isInstance(event)) {
                         method.invoke(bean, event)
