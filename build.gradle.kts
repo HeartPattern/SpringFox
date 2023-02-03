@@ -4,7 +4,7 @@ plugins {
 
 allprojects {
     group = "io.heartpattern.springfox"
-    version = "0.1.11"
+    version = "0.1.12"
 }
 
 subprojects {

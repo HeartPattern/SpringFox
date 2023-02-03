@@ -21,7 +21,7 @@ dependencies {
 
 tasks.compileKotlin.get().kotlinOptions{
     freeCompilerArgs += "-Xopt-in=kotlin.RequiresOptIn"
-    jvmTarget = "1.8"
+    jvmTarget = "17"
 }
 
 tasks.create<Jar>("sourceJar") {
